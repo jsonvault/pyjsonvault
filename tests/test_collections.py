@@ -1,5 +1,3 @@
-import pytest
-
 from jsonvault.collections import (
     CollectionDefinition,
     JsonCollection
@@ -51,7 +49,6 @@ def test_create_collection():
     assert collection.name == name
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_get_entry_not_found():
     """
     Scenario. Retrieve an non-existent entry from a collection.
@@ -65,7 +62,6 @@ def test_collection_get_entry_not_found():
     assert entry is None
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_get_non_existing_entry():
     """
     Scenario. Retrieve an non-existing entry from a collection.
@@ -79,7 +75,6 @@ def test_collection_get_non_existing_entry():
     assert entry is None
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_put_entry():
     """
     Scenario. Insert an entry in a collection.
@@ -92,7 +87,6 @@ def test_collection_put_entry():
     collection.put(entry)
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_get_existing_entry():
     """
     Scenario. Retrieve an existing entry from a collection.
@@ -107,7 +101,6 @@ def test_collection_get_existing_entry():
     assert entry == expected_entry
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_delete_non_existing_entry():
     """
     Scenario. Delete a non-existing entry from a collection.
@@ -120,7 +113,6 @@ def test_collection_delete_non_existing_entry():
     collection.delete(key)
 
 
-@pytest.mark.xfail(strict=True, reason="Waiting on implementation")
 def test_collection_delete_existing_entry():
     """
     Scenario. Delete a existing entry from a collection.
@@ -133,4 +125,4 @@ def test_collection_delete_existing_entry():
     collection.put(Entry(key, "value"))
     collection.delete(key)
     entry = collection.get(key)
-    assert entry is not None
+    assert entry is None
