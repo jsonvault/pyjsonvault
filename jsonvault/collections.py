@@ -1,4 +1,7 @@
-from typing import List
+from typing import (
+    List,
+    Union
+)
 
 from jsonvault import data
 
@@ -27,7 +30,7 @@ class JsonCollection(object):
         """
 
         self.definition = definition
-        self._layers = dict()
+        self._entries = dict()
 
     @property
     def name(self) -> str:
@@ -37,14 +40,18 @@ class JsonCollection(object):
 
         return self.definition.name
 
-    def get(self, index: str) -> data.Entry:
+    def get(self, index: str) -> Union[data.Entry, None]:
         """
         Obtain an entry by key
 
         :param index: Entry key
+        :return: The entry matching the index or None if not found.
         """
 
-        raise NotImplementedError()
+        if index not in self._entries:
+            return None
+
+        return data.Entry(index, self._entries[index])
 
     def put(self, entry: data.Entry):
         """
@@ -53,7 +60,7 @@ class JsonCollection(object):
         :param entry: Collection entry
         """
 
-        raise NotImplementedError()
+        self._entries[entry.key] = entry.value
 
     def delete(self, key: str):
         """
@@ -62,4 +69,5 @@ class JsonCollection(object):
         :param key: Key of the entry to delete
         """
 
-        raise NotImplementedError()
+        if key in self._entries:
+            del self._entries[key]
